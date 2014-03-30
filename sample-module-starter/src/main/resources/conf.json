@@ -1,0 +1,14 @@
+{
+    "verticle1Config": {
+        "test": "test"
+    },
+    "verticle2Config": {
+        "test": "test"
+    },
+    "verticle3Config": {
+        "test": "test"
+    },
+    "hello": {
+        "test": "test"
+    }
+}
