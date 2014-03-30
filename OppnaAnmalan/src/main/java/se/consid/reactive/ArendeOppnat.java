@@ -14,6 +14,7 @@ public class ArendeOppnat extends Verticle{
 
     @Override
     public void start() {
+        container.logger().info("Arende Öppnat startar");
         EventBus eb = vertx.eventBus();
 
         Handler<Message> myHandler = new Handler<Message>() {
@@ -23,6 +24,8 @@ public class ArendeOppnat extends Verticle{
         };
 
         eb.registerHandler("arende.oppnat", myHandler);
+
+        container.logger().info("Ärende öppnat startat");
 
     }
 

@@ -10,8 +10,8 @@ public class OppnaAnmalan extends Verticle {
 
 	@Override
 	public void start() {
-
-        container.deployVerticle("se.consid.reactive.ArendeOppnnat");
+        container.logger().info("Oppna anmälan startar");
+        container.deployVerticle("se.consid.reactive.ArendeOppnat");
 
 		final Handler<Message<JsonObject>> handler = new Handler<Message<JsonObject>>() {
 			@Override
@@ -33,6 +33,7 @@ public class OppnaAnmalan extends Verticle {
 				});		
 			}
 		};
+        container.logger().info("Oppna anmälan startar");
 
 
 	}
