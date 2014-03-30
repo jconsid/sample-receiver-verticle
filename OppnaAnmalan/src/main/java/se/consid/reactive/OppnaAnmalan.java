@@ -1,5 +1,6 @@
 package se.consid.reactive;
 
+import org.vertx.java.core.AsyncResult;
 import org.vertx.java.core.Handler;
 import org.vertx.java.core.eventbus.EventBus;
 import org.vertx.java.core.eventbus.Message;
@@ -12,7 +13,10 @@ public class OppnaAnmalan extends Verticle {
 	@Override
 	public void start() {
         container.logger().info("Oppna anmälan startar");
+
         container.deployVerticle("se.consid.reactive.ArendeOppnat");
+        container.deployVerticle("se.consid.reactive.SkapaLog");
+
         EventBus eb = vertx.eventBus();
 
 		final Handler<Message<JsonObject>> handler = new Handler<Message<JsonObject>>() {
