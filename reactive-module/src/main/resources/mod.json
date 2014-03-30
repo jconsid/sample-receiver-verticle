@@ -2,6 +2,7 @@
 
   // Java verticle
   "main":"com.consid.react.Receiver",
+  "next":"com.consid.react.SearchLogger",
 
   // In this example we also provide various other versions of the main verticle, you can uncomment this and
   // play around:

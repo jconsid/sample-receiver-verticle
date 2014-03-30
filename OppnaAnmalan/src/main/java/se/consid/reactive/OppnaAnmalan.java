@@ -1,10 +1,5 @@
 package se.consid.reactive;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Set;
-
-import org.vertx.java.core.AsyncResult;
 import org.vertx.java.core.Handler;
 import org.vertx.java.core.eventbus.Message;
 import org.vertx.java.core.json.JsonObject;
@@ -12,11 +7,11 @@ import org.vertx.java.platform.Verticle;
 
 
 public class OppnaAnmalan extends Verticle {
-	
-	//private final Map<String, Set<String>> oppnaArenden = new HashMap<>();
 
 	@Override
 	public void start() {
+
+        container.deployVerticle("se.consid.reactive.ArendeOppnnat");
 
 		final Handler<Message<JsonObject>> handler = new Handler<Message<JsonObject>>() {
 			@Override
@@ -32,13 +27,22 @@ public class OppnaAnmalan extends Verticle {
 						container.logger().info(answer);
 
                         request.reply(answer.getObject("result"));
+
+                        fireEventArendeOppnat(query);
 					}
 				});		
 			}
 		};
-		
-		vertx.eventBus().registerHandler("arende.oppna", handler);
+
+
 	}
+
+    private void fireEventArendeOppnat(JsonObject query) {
+        JsonObject arendeOppnat = new JsonObject();
+        arendeOppnat.putString("user", "user");
+        arendeOppnat.putElement("query", query);
+        vertx.eventBus().publish("arende.oppnat", arendeOppnat);
+    }
 
     protected JsonObject createQuery(final JsonObject message) {
         final JsonObject query = new JsonObject();
