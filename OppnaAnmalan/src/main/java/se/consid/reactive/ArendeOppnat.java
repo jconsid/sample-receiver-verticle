@@ -19,7 +19,7 @@ public class ArendeOppnat extends Verticle{
 
         Handler<Message> myHandler = new Handler<Message>() {
             public void handle(Message message) {
-                System.out.println("I received a message " + message.body());
+                container.logger().info(message.body());
             }
         };
 
