@@ -41,7 +41,7 @@ public class SkapaLog extends Verticle {
     }
 
     protected JsonObject createUpdate(final JsonObject request) {
-        final int id = Integer.parseInt(request.getString("id"));
+        final int id = request.getInteger("id");
 
         final JsonObject upd = new JsonObject();
         upd.putObject("$push", new JsonObject().putObject("loggar", request));
