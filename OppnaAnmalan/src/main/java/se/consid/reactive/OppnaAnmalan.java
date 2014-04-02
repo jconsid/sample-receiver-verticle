@@ -10,6 +10,7 @@ import org.vertx.java.platform.Verticle;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 import java.util.concurrent.ConcurrentMap;
 
@@ -70,6 +71,7 @@ public class OppnaAnmalan extends Verticle {
 
     private JsonArray append(final String anmalanUsageJson, final String username) {
         JsonArray arr = (anmalanUsageJson != null) ? new JsonArray(anmalanUsageJson) : new JsonArray();
+
         JsonObject obj = new JsonObject();
         obj.putString("username", username);
         obj.putNumber("logTime", new Date().getTime());
@@ -77,27 +79,8 @@ public class OppnaAnmalan extends Verticle {
         return arr;
     }
 
-    public static class AnmalanOppnadData {
-        private final String username;
-        private final Date logTime;
-
-        public AnmalanOppnadData(String username, Date logTime) {
-            this.username = username;
-            this.logTime = logTime;
-        }
-
-        public String getUsername() {
-            return username;
-        }
-
-        public Date getLogTime() {
-            return logTime;
-        }
-    }
-
     private void fireEventArendeOppnat(JsonObject query, final JsonArray usageList) {
         JsonObject arendeOppnat = new JsonObject();
-        arendeOppnat.putString("user", "user");
 
         final JsonArray array = new JsonArray();
 
