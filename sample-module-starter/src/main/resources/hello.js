@@ -24,7 +24,7 @@ var counter2 = 0;
 
 		vertx.setPeriodic(5000, function sendmessage()
             {
-                eb.send(ADDRESS_2, 'ping2!, counter1 = ' + counter2++, function(reply)
+                eb.send(ADDRESS_2, 'ping2!, counter2 = ' + counter2++, function(reply)
                 {
                     console.log("received reply2: " + reply);
                 });
