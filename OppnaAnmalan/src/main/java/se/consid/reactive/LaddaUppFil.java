@@ -9,6 +9,7 @@ import org.vertx.java.core.file.AsyncFile;
 import org.vertx.java.core.http.HttpServerFileUpload;
 import org.vertx.java.core.http.HttpServerRequest;
 import org.vertx.java.core.streams.Pump;
+import org.vertx.java.platform.Container;
 import org.vertx.java.platform.Verticle;
 
 /**
@@ -16,7 +17,7 @@ import org.vertx.java.platform.Verticle;
  */
 public class LaddaUppFil extends Verticle {
 
-//    @Override
+/*
     public void start2() {
 
         vertx.createHttpServer().requestHandler(new Handler<HttpServerRequest>() {
@@ -64,13 +65,24 @@ public class LaddaUppFil extends Verticle {
             }
         }).listen(8081);
     }
+    */
+
+    private String getRootPathFromConfig(final Container container){
+        if(container.config()!=null){
+            if(container.config().getString("path")!=null){
+                return container.config().getString("path");
+            }
+        }
+        return "/temp/vertx/";
+    }
 
     @Override
     public void start() {
+        final String rootPath = getRootPathFromConfig(container);
         vertx.createHttpServer().requestHandler(new Handler<HttpServerRequest>() {
             @Override
             public void handle(final HttpServerRequest req) {
-                final String filename = "/temp/vertx/file-" + UUID.randomUUID().toString();
+                final String filename = rootPath+"file-" + UUID.randomUUID().toString();
                 if (req.uri().equals("/")) {
                     container.logger().info("rooten laddas");
                     // Serve the index page

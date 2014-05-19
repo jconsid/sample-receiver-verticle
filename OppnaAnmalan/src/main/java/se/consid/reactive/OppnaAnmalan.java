@@ -23,7 +23,7 @@ public class OppnaAnmalan extends Verticle {
 
         container.deployVerticle("se.consid.reactive.ArendeOppnat");
         container.deployVerticle("se.consid.reactive.SkapaLog");
-        container.deployVerticle("se.consid.reactive.LaddaUppFil");
+        container.deployVerticle("se.consid.reactive.LaddaUppFil", container.config());
 
         EventBus eb = vertx.eventBus();
 
